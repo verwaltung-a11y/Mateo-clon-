@@ -1,0 +1,8 @@
+node_modules/
+data/*.db*
+data/import/*
+!data/import/.gitkeep
+.env
+config/branches.json
+config/akuwin.json
+config/automations.json

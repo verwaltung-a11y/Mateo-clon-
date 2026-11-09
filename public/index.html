@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KundenDialog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Anmeldung -->
+  <section id="login" class="login hidden">
+    <form id="loginForm" class="card">
+      <h1>KundenDialog</h1>
+      <p class="muted">WhatsApp-Posteingang der Filiale</p>
+      <label>Benutzer <input name="username" autocomplete="username" required></label>
+      <label>Passwort <input name="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Anmelden</button>
+      <p id="loginError" class="error"></p>
+    </form>
+  </section>
+
+  <!-- App -->
+  <section id="app" class="hidden">
+    <header class="topbar">
+      <strong>KundenDialog</strong>
+      <span id="branchLabel" class="pill"></span>
+      <span id="dryRunBadge" class="pill warn hidden" title="DRY_RUN=true – es wird nichts wirklich versendet">Testmodus</span>
+      <nav>
+        <button data-view="inbox" class="tab active">Posteingang</button>
+        <button data-view="automations" class="tab">Automationen</button>
+        <button data-view="admin" class="tab admin-only hidden">Import</button>
+      </nav>
+      <select id="branchFilter" class="admin-only hidden"></select>
+      <label class="initials">Kürzel <input id="initials" maxlength="12" placeholder="z.B. MK"></label>
+      <button id="logout" class="link">Abmelden</button>
+    </header>
+
+    <!-- Posteingang -->
+    <main id="view-inbox" class="inbox">
+      <aside class="list">
+        <div class="list-tools">
+          <input id="search" type="search" placeholder="Suchen: Name, Nummer, Kd.-Nr.">
+          <select id="statusFilter">
+            <option value="open">Offen</option>
+            <option value="done">Erledigt</option>
+            <option value="all">Alle</option>
+          </select>
+          <button id="newChat" title="Kunden anschreiben">+ Neu</button>
+        </div>
+        <ul id="convList"></ul>
+      </aside>
+
+      <section class="chat">
+        <div id="chatEmpty" class="empty">Konversation auswählen</div>
+        <div id="chatPane" class="hidden">
+          <div class="chat-head">
+            <div>
+              <div id="chatTitle" class="title"></div>
+              <div id="chatSub" class="muted small"></div>
+            </div>
+            <button id="toggleDone"></button>
+          </div>
+          <div id="messages" class="messages"></div>
+          <div id="windowClosed" class="notice hidden">
+            Das 24-Stunden-Fenster ist geschlossen – WhatsApp erlaubt jetzt nur freigegebene Vorlagen.
+            <select id="templateSelect"></select>
+            <button id="sendTemplate">Vorlage senden</button>
+          </div>
+          <form id="composer" class="composer">
+            <textarea id="composerText" rows="2" placeholder="Nachricht schreiben… (Enter = senden, Shift+Enter = neue Zeile)"></textarea>
+            <button type="submit">Senden</button>
+          </form>
+        </div>
+      </section>
+
+      <aside id="customerPanel" class="customer hidden"></aside>
+    </main>
+
+    <!-- Automationen -->
+    <main id="view-automations" class="page hidden">
+      <h2>Anstehende automatische Nachrichten</h2>
+      <p class="muted">Vorschau für die nächsten <select id="previewDays"><option>7</option><option selected>14</option><option>30</option><option>60</option></select> Tage.
+        Versand täglich im eingestellten Zeitfenster, jede Nachricht genau einmal.</p>
+      <div id="stats" class="stats"></div>
+      <table class="table"><thead><tr><th>Datum</th><th>Anlass</th><th>Kunde</th><th>Gerät</th><th>Status</th></tr></thead>
+        <tbody id="previewBody"></tbody></table>
+      <h2>Zuletzt ausgeführt</h2>
+      <table class="table"><thead><tr><th>Zeit</th><th>Regel</th><th>Kunde</th><th>Status</th><th>Hinweis</th></tr></thead>
+        <tbody id="runsBody"></tbody></table>
+    </main>
+
+    <!-- Admin -->
+    <main id="view-admin" class="page hidden">
+      <h2>AkuWin-Abgleich</h2>
+      <p class="muted">Der Abgleich läuft automatisch, sobald neue Exportdateien im Importordner liegen. Hier kann er sofort gestartet werden.</p>
+      <button id="runImport">Jetzt importieren</button>
+      <button id="runAutomations" class="secondary">Fällige Automationen jetzt senden</button>
+      <pre id="adminResult" class="result"></pre>
+      <h3>Import-Protokoll</h3>
+      <table class="table"><thead><tr><th>Zeit</th><th>Quelle</th><th>Kunden</th><th>Geräte</th><th>Übersprungen</th></tr></thead>
+        <tbody id="importLog"></tbody></table>
+    </main>
+  </section>
+
+  <!-- Dialog: Kunden anschreiben -->
+  <dialog id="newDialog">
+    <form method="dialog" class="dialog">
+      <h3>Kunden per Vorlage anschreiben</h3>
+      <input id="custSearch" type="search" placeholder="Name, Kundennummer oder Handynummer">
+      <ul id="custResults" class="results"></ul>
+      <select id="newTemplate"></select>
+      <div class="row">
+        <button value="cancel" class="secondary">Abbrechen</button>
+        <button id="newSend" value="send" disabled>Senden</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

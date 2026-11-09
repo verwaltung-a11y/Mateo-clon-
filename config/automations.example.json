@@ -1,0 +1,41 @@
+{
+  "_hinweis": "Proaktive WhatsApp-Nachrichten MÜSSEN Meta-genehmigte Vorlagen (Templates) sein. Vorlagen im WhatsApp Manager anlegen, Namen hier eintragen. params = Platzhalter {{1}}, {{2}}, ... der Vorlage in Reihenfolge.",
+  "requireOptIn": true,
+  "sendWindow": { "fromHour": 9, "toHour": 18, "weekdays": [1, 2, 3, 4, 5, 6] },
+  "delayBetweenMessagesMs": 1500,
+
+  "rules": [
+    {
+      "id": "geburtstag",
+      "label": "Geburtstagsgruß",
+      "type": "birthday",
+      "enabled": true,
+      "catchUpDays": 1,
+      "template": { "name": "geburtstag_gruss", "language": "de", "params": ["{anrede}", "{filiale}"] }
+    },
+    {
+      "id": "geraete_6_jahre",
+      "label": "Hörgeräte 6 Jahre alt – Neuversorgung möglich",
+      "type": "device_age",
+      "years": 6,
+      "catchUpDays": 30,
+      "enabled": true,
+      "template": { "name": "neuversorgung_6_jahre", "language": "de", "params": ["{anrede}", "{anpassdatum}", "{filiale}"] }
+    }
+  ],
+
+  "manualTemplates": [
+    {
+      "label": "Bitte um Rückmeldung (nach 24 h)",
+      "name": "rueckmeldung_bitte",
+      "language": "de",
+      "params": ["{anrede}", "{filiale}"]
+    },
+    {
+      "label": "Abholung bereit",
+      "name": "abholung_bereit",
+      "language": "de",
+      "params": ["{anrede}", "{filiale}"]
+    }
+  ]
+}

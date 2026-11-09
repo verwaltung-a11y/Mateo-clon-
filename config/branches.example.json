@@ -1,0 +1,20 @@
+{
+  "_hinweis": "Eine Filiale = eine WhatsApp-Business-Nummer (Festnetz). phoneNumberId stammt aus dem Meta WhatsApp Manager. akuwinCodes = Filial-Kennungen, wie sie in AkuWin im Kundenstamm stehen.",
+  "branches": [
+    {
+      "id": "zentrale",
+      "name": "Hörakustik Musterstadt – Zentrale",
+      "displayPhone": "+49 251 123456",
+      "phoneNumberId": "123456789012345",
+      "akuwinCodes": ["1", "ZENTRALE"]
+    },
+    {
+      "id": "nord",
+      "name": "Hörakustik Musterstadt – Filiale Nord",
+      "displayPhone": "+49 251 654321",
+      "phoneNumberId": "234567890123456",
+      "akuwinCodes": ["2", "NORD"]
+    }
+  ],
+  "defaultBranch": "zentrale"
+}

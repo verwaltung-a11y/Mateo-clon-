@@ -1,0 +1,45 @@
+{
+  "_hinweis": "Ordnet die Spalten des AkuWin-Exports den internen Feldern zu. Spaltennamen exakt so eintragen, wie sie in der Kopfzeile des Exports stehen (Groß-/Kleinschreibung egal).",
+  "source": "csv",
+  "syncIntervalMinutes": 60,
+
+  "csv": {
+    "folder": "./data/import",
+    "customersFile": "kunden.csv",
+    "devicesFile": "geraete.csv",
+    "encoding": "windows-1252",
+    "delimiter": "auto",
+    "dateFormat": "DD.MM.YYYY"
+  },
+
+  "sql": {
+    "_hinweis": "Optional: direkter Lesezugriff auf die AkuWin-Datenbank (MS SQL Server). Erfordert 'npm install mssql'. Die Abfragen müssen dieselben Spaltennamen liefern wie unten im Mapping.",
+    "connectionString": "Server=localhost;Database=AKUWIN;User Id=readonly;Password=...;Encrypt=false",
+    "customersQuery": "SELECT ... FROM ...",
+    "devicesQuery": "SELECT ... FROM ..."
+  },
+
+  "customerColumns": {
+    "id": "Kundennr",
+    "salutation": "Anrede",
+    "firstName": "Vorname",
+    "lastName": "Name",
+    "birthday": "Geburtsdatum",
+    "mobile": ["Mobil", "Handy", "Telefon2"],
+    "branch": "Filiale",
+    "optIn": "WhatsApp",
+    "inactive": "Verstorben"
+  },
+
+  "deviceColumns": {
+    "id": "GeraeteID",
+    "customerId": "Kundennr",
+    "side": "Seite",
+    "manufacturer": "Hersteller",
+    "model": "Modell",
+    "serial": "Seriennr",
+    "fittedAt": "Abgabedatum"
+  },
+
+  "truthyValues": ["1", "ja", "j", "x", "true", "wahr", "yes"]
+}

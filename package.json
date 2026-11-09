@@ -1,0 +1,21 @@
+{
+  "name": "kundendialog",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WhatsApp-CRM für Hörakustiker: Kundendaten aus AkuWin, automatische Nachrichten (Geburtstag, Geräte-Alter) und Filial-Inbox im Browser.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "import": "node scripts/import.js",
+    "set-password": "node scripts/set-password.js",
+    "demo": "node scripts/demo-seed.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "express": "^4.22.3"
+  }
+}
